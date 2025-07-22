@@ -54,4 +54,13 @@ public class EmployeeController {
         return service.deleteById(id);
     }
 
+    @PutMapping("/employees/{id}")
+    public Employee update(@RequestBody Employee employee, @PathVariable int id) {
+        if(service.getById(id)==null){
+            throw new EmployeeNotFoundException("Employee not found");
+        }
+
+        return service.update(employee,id);
+    }
+
 }

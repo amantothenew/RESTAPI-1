@@ -48,4 +48,21 @@ public class EmployeeService {
         employees.remove(employee);
         return employee;
     }
+
+    public Employee update(Employee e, int id) {
+        Employee employeeToUpdate = employees.stream()
+                .filter(emp->emp.getId()==id)
+                .findFirst()
+                .orElse(null);
+        if(employeeToUpdate==null){
+            return null;
+        }
+
+        int index = employees.indexOf(employeeToUpdate);
+        e.setId(id);
+        employees.set(index, e);
+        return employees.get(index);
+    }
+
+
 }
