@@ -3,6 +3,7 @@ package com.restAPI.restAPI.controller;
 import com.restAPI.restAPI.Entity.Employee;
 import com.restAPI.restAPI.exception.EmployeeNotFoundException;
 import com.restAPI.restAPI.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Void> getAllEmployees(@RequestBody Employee employee) {
+    public ResponseEntity<Void> getAllEmployees(@Valid @RequestBody Employee employee) {
         Employee save = service.save(employee);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
