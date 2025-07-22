@@ -21,4 +21,11 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() {
         return employees;
     }
+
+    public Employee getById(int id) {
+        return employees.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
 }
