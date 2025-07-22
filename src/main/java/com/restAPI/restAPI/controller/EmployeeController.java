@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -45,6 +44,14 @@ public class EmployeeController {
                         .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public Employee deleteById(@PathVariable int id) {
+        if(service.getById(id)==null){
+            throw new EmployeeNotFoundException("Employee not found");
+        }
+        return service.deleteById(id);
     }
 
 }

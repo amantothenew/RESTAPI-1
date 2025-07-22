@@ -34,4 +34,18 @@ public class EmployeeService {
         employees.add(employee);
         return employee;
     }
+
+    public Employee deleteById(int id) {
+        Employee employee = employees.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if(employee==null){
+            return null;
+        }
+
+        employees.remove(employee);
+        return employee;
+    }
 }
