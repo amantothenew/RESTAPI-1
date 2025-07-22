@@ -1,7 +1,7 @@
 package com.restAPI.restAPI.Entity;
 
 public class Employee {
-//    (id, name, age
+
     private Integer id;
     private String name;
     private Integer age;

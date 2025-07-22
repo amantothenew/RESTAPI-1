@@ -18,6 +18,7 @@ public class EmployeeController {
         this.service = service;
     }
 
+    //to get all users
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
      return service.getAllEmployees();
