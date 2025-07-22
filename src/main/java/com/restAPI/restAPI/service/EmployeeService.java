@@ -28,4 +28,10 @@ public class EmployeeService {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Employee save(Employee employee){
+        employee.setId(++employeeCounter);
+        employees.add(employee);
+        return employee;
+    }
 }

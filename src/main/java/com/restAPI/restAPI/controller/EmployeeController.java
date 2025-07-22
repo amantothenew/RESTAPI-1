@@ -4,10 +4,12 @@ import com.restAPI.restAPI.Entity.Employee;
 import com.restAPI.restAPI.exception.EmployeeNotFoundException;
 import com.restAPI.restAPI.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,17 @@ public class EmployeeController {
             throw new EmployeeNotFoundException("Employee not found");
         }
         return service.getById(id);
+    }
+
+    @PostMapping("/employees")
+    public ResponseEntity<Void> getAllEmployees(@RequestBody Employee employee) {
+        Employee save = service.save(employee);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                        .path("/{id}")
+                        .buildAndExpand(save.getId())
+                        .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
 }
